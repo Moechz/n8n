@@ -1,0 +1,61 @@
+# ===========================================================================
+# n8n Workflow Automation for TerraMaster TOS 7 (Docker application)
+# ===========================================================================
+# Upstream image : n8nio/n8n:2.41.3 (Docker Hub, used unmodified)
+#                  -> https://github.com/n8n-io/n8n
+#
+# Ports   : host 8001 -> container 5678. The host port is in the
+#           TOS-recommended 8000-19999 range and is not one of the reserved
+#           ports (22/80/443/445/3306/5050/5432/6379/8181/8443).
+# Volumes : all persistent data lives below
+#           /Volume1/DockerAppData/n8ndocker/. The /Volume* wildcard is
+#           deliberately NOT used: the platform does not expand it.
+# TOS rules honoured: Docker Hub image with a fixed tag (never ':latest'),
+#           container_name == application id, restart: unless-stopped,
+#           non-root user, no privileged mode, no network_mode: host, no
+#           cap_add, explicit TZ, a healthcheck on the only service, and
+#           x-app-meta as the last block.
+# Wrapper : the upstream image already runs as the unprivileged node user (uid 1000), so this
+#           entrypoint is not about privileges: it only adds the optional public-URL wiring for
+#           webhook and form links - see src/entrypoint.sh.
+# Escaping: docker compose interpolates ${VAR}/$VAR in compose files, so any
+#           '$' meant for the shell is written '$$'.
+#
+# NOTE for maintainers: never place a comment line directly in front of a
+# "- value" sequence item (ports, volumes, ...). The official
+# TOSAppSelfTestingTool parses the compose file line by line; a comment inside
+# a sequence makes it skip its permission sync, the mounted directories stay
+# root-owned and the non-root container cannot write into them.
+
+services:
+  n8ndocker:
+    image: n8nio/n8n:2.41.3
+    container_name: n8ndocker
+    restart: unless-stopped
+    user: "1000:1000"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        @@ENTRYPOINT_SH@@
+    ports:
+      - "8001:5678"
+    environment:
+      TZ: "Asia/Shanghai"
+      GENERIC_TIMEZONE: "Asia/Shanghai"
+      N8N_SECURE_COOKIE: "false"
+      N8N_DIAGNOSTICS_ENABLED: "false"
+    volumes:
+      - /Volume1/DockerAppData/n8ndocker/data:/home/node/.n8n
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:5678/healthz/readiness || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+# TOS App Center web metadata (must be the last block of the file):
+# web.port is the published host port above, protocol is http.
+x-app-meta:
+  web:
+    port: 8001
+    protocol: http

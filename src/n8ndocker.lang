@@ -1,0 +1,195 @@
+# ===========================================================================
+# Multilingual file for the TOS 7 Docker application "n8ndocker".
+# File name MUST be: <appid>.lang.  23-language superset (14 required by TOS).
+# The App Center picks the text matching the user's device language;
+# untranslated nodes fall back to English, which the official guide allows.
+# Fields: name (app title), auth (upstream author), descript (up to 512
+# chars), release_note, important (up to 512 chars).
+# Translations come from tosapp.json "translations"; run
+#   tosdocker lang <app>          to re-render this file
+#   tosdocker translate <app>     to see what still needs translating
+# ===========================================================================
+[en-us]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[zh-cn]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n 是自托管的工作流自动化平台。你可以在可视化画布上把 400 多个应用、数据库与 AI 模型连接起来，自动完成重复性工作：同步文件、发送通知、执行定时任务、加工数据，只在需要时写少量代码。本应用在 NAS 上以非 root 容器运行 Docker Hub 官方镜像，所有工作流、凭据与执行历史都保存在应用数据目录中，重启与更新都不会丢失。"
+release_note = "1. 首次发布：来自 Docker Hub 的 n8n 2.41.3，以非 root 容器运行；工作流、凭据与执行历史保存在应用数据目录。"
+important    = "需要 DockerEngine（缺失时应用中心会自动提示安装）。镜像在安装时从 Docker Hub 拉取；若 NAS 无法直连 Docker Hub，请先在 DockerEngine 中配置镜像加速。工作流、凭据、SQLite 数据库与加密密钥都保存在应用数据目录，卸载并删除数据前请先备份；加密密钥一旦丢失，已保存的凭据将无法解密。Webhook、表单与 OAuth 链接默认使用 http://localhost:5678，如需从其他设备访问，请把数据目录中 public-url.txt 里的地址取消注释并重启应用。"
+
+[zh-hk]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n 是自架式工作流自動化平台。你可以在視覺化畫布上把 400 多個應用程式、資料庫與 AI 模型連接起來，自動完成重複性工作：同步檔案、發送通知、執行排程任務、加工資料，只在需要時寫少量程式碼。本應用在 NAS 上以非 root 容器執行 Docker Hub 官方映像，所有工作流、憑證與執行歷史都保存在應用資料目錄中，重新啟動與更新都不會遺失。"
+release_note = "1. 首次發佈：來自 Docker Hub 的 n8n 2.41.3，以非 root 容器執行；工作流、憑證與執行歷史保存在應用資料目錄。"
+important    = "需要 DockerEngine（缺少時應用中心會自動提示安裝）。映像在安裝時從 Docker Hub 下載；若 NAS 無法直連 Docker Hub，請先在 DockerEngine 中設定映像加速。工作流、憑證、SQLite 資料庫與加密金鑰都保存在應用資料目錄，解除安裝並刪除資料前請先備份；加密金鑰一旦遺失，已儲存的憑證將無法解密。Webhook、表單與 OAuth 連結預設使用 http://localhost:5678，如需從其他裝置存取，請把應用資料目錄中 public-url.txt 裡的位址取消註解並重新啟動應用。"
+
+[fr-fr]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[de-de]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[it-it]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[es-es]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[hu-hu]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[ja-jp]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[ko-kr]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[pl-pl]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[ru-ru]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[tr-tr]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[pt-pt]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[ar-sa]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[cs-cz]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[he-il]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[id-id]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[nb-no]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[nl-nl]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[sv-se]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[th-th]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+
+[vi-vn]
+name         = "n8n Workflow Automation"
+auth         = "n8n GmbH"
+version      = "@@VERSION@@"
+descript     = "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update."
+release_note = "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder."
+important    = "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices."
+

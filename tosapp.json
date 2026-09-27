@@ -1,0 +1,161 @@
+{
+  "app_id": "n8ndocker",
+  "title": "n8n Workflow Automation",
+  "image": "n8nio/n8n:2.41.3",
+  "repo_name": "n8n",
+  "mode": "wrapper",
+  "entrypoint_file": "src/entrypoint.sh",
+  "wrapper_note": "the upstream image already runs as the unprivileged node user (uid 1000), so this\nentrypoint is not about privileges: it only adds the optional public-URL wiring for\nwebhook and form links - see src/entrypoint.sh.\n",
+  "wrapper_note_readme": "- **Entrypoint wrapper** (not a privilege shim): the image already runs as the unprivileged `node` user; `src/entrypoint.sh` only wires up the optional public URL described in the next bullet and then hands over to the upstream `docker-entrypoint.sh` through `tini`.",
+  "user_mode_text": "上游镜像本身支持非 root；entrypoint 包装只做「公共链接」接线",
+  "user_mode_cons": "- 上游镜像本来就以非 root 的 `node`（uid 1000）运行，`user: \"1000:1000\"` 直接沿用，不需要为了权限改写任何路径。\n- 覆盖 entrypoint 的唯一原因是 n8n 的 webhook / 表单 / OAuth 回调链接需要一个公共地址（`WEBHOOK_URL`），\n  而镜像只能默认 `http://localhost:5678/`。包装脚本从数据目录读取可选的 `public-url.txt` 注入该变量，\n  再通过 `tini` 把控制权交回上游 `docker-entrypoint.sh`；不写配置时不改变任何行为。\n",
+  "healthcheck_note": "探测 n8n 官方就绪探针 `/healthz/readiness`：初始化期间返回 503（容器显示 starting）， 数据库迁移完成、可以对外服务后返回 200（healthy）。`start_period` 给了 120s 宽限，首次启动在慢盘上也不会被误判。",
+  "container_port": 5678,
+  "category": [
+    "Utilities"
+  ],
+  "user": "1000:1000",
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/n8ndocker/data",
+      "container": "/home/node/.n8n"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai",
+    "GENERIC_TIMEZONE": "Asia/Shanghai",
+    "N8N_SECURE_COOKIE": "false",
+    "N8N_DIAGNOSTICS_ENABLED": "false"
+  },
+  "auth": "n8n GmbH",
+  "upstream_url": "https://github.com/n8n-io/n8n",
+  "upstream_license": "Sustainable Use License (fair-code)",
+  "license": "Sustainable Use License (fair-code)",
+  "license_notes": "n8n is **fair-code**, not an OSI-approved open-source project: the\nSustainable Use License allows free internal and personal use, but not\nreselling n8n itself as a service. See\nhttps://docs.n8n.io/sustainable-use-license/ for the exact terms. Only the\nofficial Docker Hub image is used here; no upstream source code is\nredistributed.\n",
+  "descript": "n8n is a self-hosted workflow automation platform. On a visual canvas you connect 400+ apps, databases and AI models to automate repetitive work - sync files, send notifications, run scheduled jobs, enrich data - writing code only where you need it. This app runs the official Docker Hub image as a non-root container on your NAS and keeps every workflow, credential and execution history in an application data folder, so nothing is lost on restart or update.",
+  "important": "Requires DockerEngine (the App Center installs it if missing); add a registry mirror in DockerEngine if your NAS cannot reach Docker Hub. Workflows, credentials, the SQLite database and the encryption key all live in the application data folder - back it up before uninstalling with data removal: without the encryption key saved credentials can no longer be decrypted. Webhook and form links default to http://localhost:5678; set your NAS address in public-url.txt to make them reachable from other devices.",
+  "release_note": "1. First release: n8n 2.41.3 from Docker Hub, running as a non-root container on your NAS. Workflows, credentials and execution history are kept in the application data folder.",
+  "data_notes": "All state lives in the application data folder: `config` holds the encryption key, `database.sqlite` the workflows, credentials and execution history, `nodes/` community nodes, `storage/` binary files, and `public-url.txt` the optional public address.",
+  "design_notes": [
+    "**Correct public links.** The upstream image builds webhook, form and OAuth callback URLs from `WEBHOOK_URL` and defaults to `http://localhost:5678/`, which no other device can reach. `src/entrypoint.sh` reads an optional `public-url.txt` from the application data folder and passes it to n8n, so the setting lives in the data volume and survives container updates.",
+    "**Login works over plain HTTP.** `N8N_SECURE_COOKIE=false`, because TOS opens the app as `http://<NAS-IP>:<port>` and a `Secure` cookie would be dropped by the browser, making login loop.",
+    "**Timezone.** `TZ` and `GENERIC_TIMEZONE` are both set, so Schedule triggers fire at the local time instead of the upstream `America/New_York` default.",
+    "**Telemetry off.** `N8N_DIAGNOSTICS_ENABLED=false`."
+  ],
+  "limitations": [
+    "Webhook, form and OAuth callback links are built from the public base URL. Until you set one in `public-url.txt` they use `http://localhost:5678/` and only work on the NAS itself.",
+    "The bundled database is SQLite inside the application data folder. For heavy or multi-user workloads n8n supports an external PostgreSQL; that requires editing `docker-compose.yml`.",
+    "The app is served over plain HTTP on the LAN. Do not expose the published port to the internet; put it behind a TLS reverse proxy if you need remote access."
+  ],
+  "runtime_files": [
+    {
+      "path": "data/config",
+      "purpose": "n8n instance encryption key (credentials are encrypted with it)",
+      "created": "first start",
+      "growth": "static",
+      "lifecycle": "never overwritten; required to decrypt saved credentials"
+    },
+    {
+      "path": "data/database.sqlite",
+      "purpose": "workflows, credentials, users and execution history (SQLite)",
+      "created": "first start",
+      "growth": "grows with every execution; enable execution pruning in n8n for long-term use",
+      "lifecycle": "never overwritten; the app owns it"
+    },
+    {
+      "path": "data/nodes/package.json",
+      "purpose": "registry of community nodes installed from the n8n UI",
+      "created": "first start",
+      "growth": "one entry per installed community node",
+      "lifecycle": "managed by n8n"
+    },
+    {
+      "path": "data/storage",
+      "purpose": "binary data (uploaded files) when file-based binary storage is enabled",
+      "created": "first start",
+      "growth": "grows with uploaded/attached files",
+      "lifecycle": "managed by n8n"
+    },
+    {
+      "path": "data/n8nEventLog.log",
+      "purpose": "instance event log (startup, version changes)",
+      "created": "first start",
+      "growth": "small, appended per event",
+      "lifecycle": "safe to delete"
+    },
+    {
+      "path": "data/public-url.txt",
+      "purpose": "optional public base URL for webhook/form/OAuth links (see the file)",
+      "created": "first start by the entrypoint wrapper",
+      "growth": "static",
+      "lifecycle": "never overwritten; edit it to point links at your NAS"
+    }
+  ],
+  "healthcheck": [
+    "CMD-SHELL",
+    "wget -q -O /dev/null http://127.0.0.1:5678/healthz/readiness || exit 1"
+  ],
+  "healthcheck_interval": "30s",
+  "healthcheck_timeout": "10s",
+  "healthcheck_retries": 5,
+  "healthcheck_start_period": "120s",
+  "http_path": "/healthz/readiness",
+  "platform": "x86_64",
+  "publisher": "Moechz",
+  "compose_project": "n8ndocker",
+  "github_repo": "n8n",
+  "upstream_version": "2.41.3",
+  "release_tag_prefix": "v",
+  "version": "2.41.3-1",
+  "help": "https://github.com/Moechz/n8n/issues",
+  "official": "https://github.com/n8n-io/n8n",
+  "translations": {
+    "zh-cn": {
+      "descript": "n8n 是自托管的工作流自动化平台。你可以在可视化画布上把 400 多个应用、数据库与 AI 模型连接起来，自动完成重复性工作：同步文件、发送通知、执行定时任务、加工数据，只在需要时写少量代码。本应用在 NAS 上以非 root 容器运行 Docker Hub 官方镜像，所有工作流、凭据与执行历史都保存在应用数据目录中，重启与更新都不会丢失。",
+      "important": "需要 DockerEngine（缺失时应用中心会自动提示安装）。镜像在安装时从 Docker Hub 拉取；若 NAS 无法直连 Docker Hub，请先在 DockerEngine 中配置镜像加速。工作流、凭据、SQLite 数据库与加密密钥都保存在应用数据目录，卸载并删除数据前请先备份；加密密钥一旦丢失，已保存的凭据将无法解密。Webhook、表单与 OAuth 链接默认使用 http://localhost:5678，如需从其他设备访问，请把数据目录中 public-url.txt 里的地址取消注释并重启应用。",
+      "release_note": "1. 首次发布：来自 Docker Hub 的 n8n 2.41.3，以非 root 容器运行；工作流、凭据与执行历史保存在应用数据目录。"
+    },
+    "zh-hk": {
+      "descript": "n8n 是自架式工作流自動化平台。你可以在視覺化畫布上把 400 多個應用程式、資料庫與 AI 模型連接起來，自動完成重複性工作：同步檔案、發送通知、執行排程任務、加工資料，只在需要時寫少量程式碼。本應用在 NAS 上以非 root 容器執行 Docker Hub 官方映像，所有工作流、憑證與執行歷史都保存在應用資料目錄中，重新啟動與更新都不會遺失。",
+      "important": "需要 DockerEngine（缺少時應用中心會自動提示安裝）。映像在安裝時從 Docker Hub 下載；若 NAS 無法直連 Docker Hub，請先在 DockerEngine 中設定映像加速。工作流、憑證、SQLite 資料庫與加密金鑰都保存在應用資料目錄，解除安裝並刪除資料前請先備份；加密金鑰一旦遺失，已儲存的憑證將無法解密。Webhook、表單與 OAuth 連結預設使用 http://localhost:5678，如需從其他裝置存取，請把應用資料目錄中 public-url.txt 裡的位址取消註解並重新啟動應用。",
+      "release_note": "1. 首次發佈：來自 Docker Hub 的 n8n 2.41.3，以非 root 容器執行；工作流、憑證與執行歷史保存在應用資料目錄。"
+    }
+  },
+  "probe": {
+    "user_in_image": "node",
+    "entrypoint": [
+      "tini",
+      "--",
+      "/docker-entrypoint.sh"
+    ],
+    "cmd": null,
+    "exposed_ports": [
+      5678
+    ],
+    "declared_volumes": [],
+    "image_healthcheck": [],
+    "digest": "n8nio/n8n@sha256:fdce8f852ac7abbb2f31a53170bc3c2eeec45c37c0692a99f2d6c11b3822cd98",
+    "architecture": "x86_64",
+    "platforms": [],
+    "http_client_in_image": "wget",
+    "trial_run": {
+      "ok": true,
+      "http_code": "200",
+      "state": "running",
+      "paths": [
+        "/home"
+      ],
+      "host_port": 18000,
+      "files_in_mounts": ""
+    },
+    "docker_hub": {},
+    "github": {
+      "owner": "n8n-io",
+      "repo": "n8n",
+      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "license": "Sustainable Use License (fair-code)",
+      "homepage": "https://n8n.io"
+    }
+  },
+  "host_port": 8001
+}
