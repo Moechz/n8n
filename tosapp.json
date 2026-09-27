@@ -40,6 +40,7 @@
     "**Correct public links.** The upstream image builds webhook, form and OAuth callback URLs from `WEBHOOK_URL` and defaults to `http://localhost:5678/`, which no other device can reach. `src/entrypoint.sh` reads an optional `public-url.txt` from the application data folder and passes it to n8n, so the setting lives in the data volume and survives container updates.",
     "**Login works over plain HTTP.** `N8N_SECURE_COOKIE=false`, because TOS opens the app as `http://<NAS-IP>:<port>` and a `Secure` cookie would be dropped by the browser, making login loop.",
     "**Timezone.** `TZ` and `GENERIC_TIMEZONE` are both set, so Schedule triggers fire at the local time instead of the upstream `America/New_York` default.",
+    "**Readiness probe.** The healthcheck uses n8n's own readiness endpoint (`/healthz/readiness`): it answers 503 while the database migrations still run and 200 only when the instance can serve traffic, so the container is not reported healthy before it is usable (`start_period: 120s` covers a slow disk on the first start).",
     "**Telemetry off.** `N8N_DIAGNOSTICS_ENABLED=false`."
   ],
   "limitations": [
