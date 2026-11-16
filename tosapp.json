@@ -107,7 +107,7 @@
   "github_repo": "n8n",
   "upstream_version": "2.41.3",
   "release_tag_prefix": "v",
-  "version": "2.41.3-1",
+  "version": "2.41.3-2",
   "help": "https://github.com/Moechz/n8n/issues",
   "official": "https://github.com/n8n-io/n8n",
   "translations": {
